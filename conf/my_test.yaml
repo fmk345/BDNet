@@ -1,0 +1,52 @@
+##### hydra
+hydra:
+    run:
+      dir: ./outputs/${exp_name}/${status}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+    sweep:
+      dir: ./outputs/${exp_name}/${status}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+      subdir: ${hydra.job.override_dirname}
+# hydra:
+#     run:
+#       dir: /ssd/0/zzh/tmp/CEBD/outputs/${exp_name}/${status}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+#     sweep:
+#       dir: /ssd/0/zzh/tmp/CEBD/outputs/${exp_name}/${status}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+#       subdir: ${hydra.job.override_dirname}
+
+
+##### dir
+exp_name: code_dev/unified  # mark: experiment name: unified | BDNeRV_RC
+tester_name: my_tester # mark: tester name: my_tester | cebd_tester
+status: test       # run status: train|test|real_test
+checkpoint: ${hydra:runtime.cwd}/outputs/benchmark/unified/train/2023-05-13_00-14-21/checkpoints/model_latest.pth  # loading checkpoint ${hydra:runtime.cwd}
+outputs_dir: outputs/
+
+##### run
+gpus: [1]           # GPU used, Warning: Only one GPU is supported for 'test' now
+num_workers: 2      # number of cpu worker
+save_img: false      # save the reconstructed images
+
+# params
+sigma_range: 0
+test_sigma_range: 0
+frame_n: 8
+trainer:
+  epochs: 500
+
+##### metrics
+metrics:
+  - _target_: srcs.metric.metric_iqa.IQA_Metric
+    metric_name: psnr
+  - _target_: srcs.metric.metric_iqa.IQA_Metric
+    metric_name: ssim
+  - _target_: srcs.metric.metric_iqa.IQA_Metric
+    metric_name: lpips
+
+##### data&nets
+defaults:
+  - data: vid_test_data
+  - network: unified  # MARK: unified | cebd
+  - hparams: ced_hyparams # for fswd_traj_tester
+
+  - override hydra/job_logging : custom # custom || colorlog
+  - override hydra/hydra_logging: colorlog
+  - _self_

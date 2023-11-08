@@ -1,0 +1,16 @@
+# @package _global_
+# batch_size: 6
+# patch_size: 256
+# learning_rate: 5e-4 # 2e-4
+# weight_decay: 0
+# ce_code:   # init ce code
+# ce_code: [1,1,0,0,1,0,1,0,1,0]
+# ce_code: [1,0,1,1,1,0,0,0,1,0,1,1,0,0,0,1,1,0,1,1,1,0,0,0,1,0,0,0,1,1,0,1] # Cui et. al. [cui2020MultiframeMotion]
+# ce_code: [1,1,1,1,0,0,0,1,1,1,0,0,1,1,0,1,0,1,0,0,0,1,0,0,1,0,0,0,1,1,0,1] # [raskar2006CodedExposure] 
+# ce_code: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] # all one 
+# psf_sz: 64
+# psf_sz: 40 # for debug
+# scheduler_step_size: 40 
+# scheduler_gamma: 0.9 # 0.5
+# ce_opt_epoch: # optimizing epochs of ce code: 150 
+# input_denoise_epoch: 200 # optimizing epochs of denoise module

@@ -1,0 +1,53 @@
+##### hydra
+hydra:
+    run:
+      dir: ./outputs/${exp_name}/${status}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+    sweep:
+      dir: ./outputs/${exp_name}/${status}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+      subdir: ${hydra.job.override_dirname}
+# hydra:
+#     run:
+#       dir: /ssd/0/zzh/tmp/CEBD/outputs/${exp_name}/${status}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+#     sweep:
+#       dir: /ssd/0/zzh/tmp/CEBD/outputs/${exp_name}/${status}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+#       subdir: ${hydra.job.override_dirname}
+
+
+##### dir
+exp_name: code_dev/BDNeRV_RC  # experiment name
+tester_name: cebd_tester # tester name: cebd_realtester | cebd_tester | cebd_tester_random_access # zzh
+status: test       # run status: train|test|real_test  # zzh
+checkpoint: ${hydra:runtime.cwd}/outputs/benchmark/BDNeRV/M_ce8_len8-03_noise0-0.01_2023-05-10_10-46-07/checkpoints/model_latest.pth  # loading checkpoint ${hydra:runtime.cwd}
+outputs_dir: outputs/
+
+##### run
+gpus: [2]           # GPU used, Warning: Only one GPU is supported for 'test' now
+num_workers: 2      # number of cpu worker
+save_img: false # save the reconstructed images
+time_ticks: # assigned time ticks: [1,3,5,7] | [0,2,4,6] (for cebd_tester_random_access)
+
+# params
+sigma_range: 0
+test_sigma_range: 0
+frame_n: 8
+trainer:
+  epochs: 500
+
+##### metrics
+metrics:
+  - _target_: srcs.metric.metric_iqa.IQA_Metric
+    metric_name: psnr
+  - _target_: srcs.metric.metric_iqa.IQA_Metric
+    metric_name: ssim
+  - _target_: srcs.metric.metric_iqa.IQA_Metric
+    metric_name: lpips
+
+##### data&nets
+defaults:
+  - data: vid_test_data
+  - network: cebd  # for fswd_traj_tester
+  - hparams: ced_hyparams # for fswd_traj_tester
+
+  - override hydra/job_logging : custom # custom || colorlog
+  - override hydra/hydra_logging: colorlog
+  - _self_
