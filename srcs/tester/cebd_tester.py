@@ -5,11 +5,11 @@ import torch
 import time
 from omegaconf import OmegaConf
 from tqdm import tqdm
-from srcs.utils.util import instantiate
-from srcs.utils.utils_image_kair import tensor2uint, imsave
+from ..utils.util import instantiate
+from ..utils.utils_image_kair import tensor2uint, imsave
 # from srcs.utils.utils_patch_proc import window_partitionx, window_reversex
 import torch.nn.functional as F
-from srcs.utils.utils_eval_zzh import gpu_inference_time, model_complexity
+from ..utils.utils_eval_zzh import gpu_inference_time, model_complexity
 
 def testing(gpus, config):
     test_worker(gpus, config)

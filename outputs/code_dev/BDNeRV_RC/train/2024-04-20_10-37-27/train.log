@@ -1,0 +1,454 @@
+[2024-04-20 10:37:29,432][train][INFO] - CEBDNet(
+  (BlurNet): CEBlurNet()
+  (DeBlurNet): BDNeRV_RC(
+    (mainbody): CUnet(
+      (encoder_first): Sequential(
+        (0): Conv(
+          (body): Sequential(
+            (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+            (1): ReLU(inplace=True)
+          )
+        )
+        (1): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (2): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (3): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (4): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+      )
+      (encoder_second): Sequential(
+        (0): Conv(
+          (body): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+            (1): ReLU(inplace=True)
+          )
+        )
+        (1): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (2): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (3): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (4): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+      )
+      (decoder_second): Sequential(
+        (0): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (1): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (2): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (3): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (4): Deconv(
+          (body): Sequential(
+            (0): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+            (1): ReLU(inplace=True)
+          )
+        )
+      )
+      (decoder_first): Sequential(
+        (0): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (1): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (2): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (3): ResBlock(
+          (body): Sequential(
+            (0): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+            (1): ReLU(inplace=True)
+            (2): Conv(
+              (body): Sequential(
+                (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              )
+            )
+          )
+        )
+        (4): Deconv(
+          (body): Sequential(
+            (0): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+            (1): ReLU(inplace=True)
+          )
+        )
+      )
+      (cond_fusion): CFusion(
+        (fusion): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+              (1): ReLU(inplace=True)
+            )
+          )
+          (1): Conv(
+            (body): Sequential(
+              (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ReLU(inplace=True)
+            )
+          )
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+              (1): ReLU(inplace=True)
+            )
+          )
+        )
+      )
+    )
+    (out): Sequential(
+      (0): ResBlock(
+        (body): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (1): ReLU(inplace=True)
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+        )
+      )
+      (1): ResBlock(
+        (body): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (1): ReLU(inplace=True)
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+        )
+      )
+      (2): Conv(
+        (body): Sequential(
+          (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+    )
+    (feature): Sequential(
+      (0): Conv(
+        (body): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): ResBlock(
+        (body): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (1): ReLU(inplace=True)
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+        )
+      )
+      (2): ResBlock(
+        (body): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (1): ReLU(inplace=True)
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+        )
+      )
+      (3): ResBlock(
+        (body): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (1): ReLU(inplace=True)
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+        )
+      )
+    )
+    (catfusion): Sequential(
+      (0): Conv(
+        (body): Sequential(
+          (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): ResBlock(
+        (body): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (1): ReLU(inplace=True)
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+        )
+      )
+      (2): ResBlock(
+        (body): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (1): ReLU(inplace=True)
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+        )
+      )
+      (3): ResBlock(
+        (body): Sequential(
+          (0): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (1): ReLU(inplace=True)
+          (2): Conv(
+            (body): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+        )
+      )
+    )
+    (pe_t): Positional Encoder: pos_b=1.25, pos_l=80, embed_length=160, to_embed=True
+    (embed_mlp): Sequential(
+      (0): Linear(in_features=160, out_features=512, bias=True)
+      (1): GELU(approximate='none')
+      (2): Linear(in_features=512, out_features=256, bias=True)
+      (3): GELU(approximate='none')
+    )
+  )
+)
+[2024-04-20 10:37:30,208][trainer][INFO] - 
+⏩⏩ Start Training! | 2024-04-20 10:37:30 ⏩⏩
+

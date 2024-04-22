@@ -56,7 +56,7 @@ def model_complexity(model, input_shape, input_constructor=None, logger=None, pr
         logger (optional): logging logger. Defaults to None.
         kwargs: other arguments for ptflops.get_model_complexity_info
     """
-
+    print(model)
     macs, params = get_model_complexity_info(
         model=model, input_res=input_shape, input_constructor=input_constructor, print_per_layer_stat=print_per_layer_stat, **kwargs)  #
     if logger:

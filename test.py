@@ -9,7 +9,7 @@ from importlib import import_module
 # ===============
 
 # my_test | cebd_test
-
+os.environ['NUMEXPR_MAX_THREADS'] = r'1'
 @hydra.main(version_base=None,config_path='conf', config_name='cebd_test')
 def main(config):
     # GPU setting
@@ -27,6 +27,7 @@ def main(config):
     print('='*40+'\n', config_v, '\n'+'='*40+'\n')
     # testing
     tester_name = 'srcs.tester.%s' % config.tester_name
+    # print(tester_name)
     testing_module = import_module(tester_name)
     testing_module.testing(gpus, config)
 

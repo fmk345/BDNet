@@ -23,7 +23,7 @@ class CEBDNet(nn.Module):
         # deep deblur net
         if bd_net == 'BDNeRV':
             self.DeBlurNet = BDNeRV()
-        elif bd_net=='BDNeRV_RC':
+        elif bd_net=='BDNeRV_RC':#就是这个
             self.DeBlurNet = BDNeRV_RC()
         elif bd_net == 'BDNeRV_RC_RA':
             self.DeBlurNet = BDNeRV_RC_RA()
@@ -41,4 +41,5 @@ class CEBDNet(nn.Module):
             output = self.DeBlurNet(ce_blur=ce_blur_img_noisy, ce_code=ce_code_up, time_ticks=time_ticks)
         else:
             output = self.DeBlurNet(ce_blur=ce_blur_img_noisy, time_idx=time_idx, ce_code=ce_code_up)
+        # print(output)
         return output, ce_blur_img, ce_blur_img_noisy

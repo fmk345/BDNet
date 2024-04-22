@@ -17,9 +17,9 @@ hydra:
 exp_name: code_dev/BDNeRV_RC  # experiment name
 tester_name: cebd_tester # tester name: cebd_realtester | cebd_tester | cebd_tester_random_access # zzh
 status: test       # run status: train|test|real_test  # zzh
-checkpoint: ${hydra:runtime.cwd}/outputs/benchmark/BDNeRV/M_ce8_len8-03_noise0-0.01_2023-05-10_10-46-07/checkpoints/model_latest.pth  # loading checkpoint ${hydra:runtime.cwd}
+checkpoint: ${hydra:runtime.cwd}/code/BDNet/outputs/code_dev/BDNeRV_RC/train/2023-11-15_11-13-38/checkpoints/model_latest.pth  # loading checkpoint ${hydra:runtime.cwd}
 outputs_dir: outputs/
-
+#/home/fmk/outputs/code_dev/BDNeRV_RC/train/2023-11-09_17-15-41/checkpoints/model_latest.pth
 ##### run
 gpus: [2]           # GPU used, Warning: Only one GPU is supported for 'test' now
 num_workers: 2      # number of cpu worker

@@ -49,8 +49,9 @@ class WeightedLoss(nn.Module):
     def forward(self, output, target):
         loss_v = 0
         for loss in self.losses:
+            # print(output)
+            # print(target)
             loss_v += loss['cls'](output, target)*loss['weight']
-
         return loss_v
 
 # ===========================

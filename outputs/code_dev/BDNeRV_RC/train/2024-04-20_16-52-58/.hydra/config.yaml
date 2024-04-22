@@ -1,0 +1,94 @@
+data_loader:
+  _target_: srcs.data_loader._my_video_data_loaders.get_data_loaders
+  data_dir: /home/fmk/xmuproject/code/BDNet/complete_ms_data
+  frame_num: 8
+  batch_size: 32
+  patch_size: 256
+  tform_op: all
+  status: train
+  shuffle: true
+  num_workers: ${num_workers}
+  pin_memory: true
+  prefetch_factor: 1
+  all2CPU: false
+network_name: cebd
+arch:
+  _target_: srcs.model.cebd_model.CEBDNet
+  sigma_range: ${sigma_range}
+  test_sigma_range: ${test_sigma_range}
+  ce_code_n: 8
+  frame_n: ${frame_n}
+  ce_code_init:
+  - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  - 1
+  - 0
+  - 1
+  opt_cecode: false
+  ce_net: CEBlurNet
+  binary_fc: STEBinary_fc
+  bd_net: BDNeRV_RC
+loss:
+  main_loss: 1
+  reblur_loss: 0.2
+main_loss:
+  _target_: srcs.loss._pix_loss_cls.WeightedLoss
+  loss_conf_dict:
+    CharbonnierLoss: 1.0
+    L1Loss: 0.05
+    EdgeLoss: 0.05
+reblur_loss:
+  _target_: srcs.loss._pix_loss_cls.CharbonnierLoss
+optimizer:
+  _target_: srcs.optimizer.adan.Adan
+  lr: 0.0005
+lr_scheduler:
+  _target_: srcs.scheduler._base_scheduler.getGradualWarmupScheduler
+  multiplier: 1
+  warmup_epochs: 2
+  after_scheduler_conf:
+    type: torch.optim.lr_scheduler.CosineAnnealingLR
+    args:
+      T_max: ${trainer.epochs}
+      eta_min: 1.0e-06
+exp_name: code_dev/BDNeRV_RC
+trainer_name: cebd_trainer
+status: train
+resume_conf: null
+resume: null
+checkpoint_dir: checkpoints/
+final_test_dir: final_test/
+log_dir: events/
+gpus:
+- 2
+num_workers: 2
+trainer:
+  epochs: 500
+  limit_train_iters: 500
+  limit_valid_iters: 50
+  monitor: min loss/valid
+  saving_top_k: 5
+  landmark_list:
+  - 100
+  - 200
+  - 300
+  - 400
+  early_stop: null
+  logging_step: 1000
+  tensorboard: true
+  log_weight: true
+  final_test: false
+sigma_range:
+- 0
+- 0.01
+test_sigma_range: 0
+ce_opt_epoch: null
+frame_n: 8
+metrics:
+- _target_: srcs.metric.metric_iqa.IQA_Metric
+  metric_name: psnr
+- _target_: srcs.metric.metric_iqa.IQA_Metric
+  metric_name: ssim

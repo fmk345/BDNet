@@ -37,8 +37,7 @@ def vid_transform(vid, prob=0.5, tform_op=['all']):
         if prob/4 < np.random.rand() <= prob/2:
             np.transpose(vid, axes=(0, 2, 1))[:, ::-1, ...]  # -90
         elif prob/2 < np.random.rand() <= prob:
-            vid = np.transpose(
-                vid[:, ::-1, :][:, :, ::-1], axes=(0, 2, 1))[:, ::-1, ...]  # 90
+            vid = np.transpose(vid[:, ::-1, :][:, :, ::-1], axes=(0, 2, 1))[:, ::-1, ...]  # 90
 
     if 'reverse' in tform_op or 'all' in tform_op:
         if np.random.rand() < prob:
@@ -66,7 +65,6 @@ class VideoFrame_Dataset(Dataset):
         self.img_paths = []
         self.vid_idx = []
         self.stride = stride  # stride of the starting frame
-
         # get image paths
         img_nums = []
         vid_paths = []
@@ -94,10 +92,10 @@ class VideoFrame_Dataset(Dataset):
 
         counter = 0
         for img_num in img_nums:
-            self.vid_idx.extend(
-                list(range(counter, counter+img_num-self.vid_length+1, stride)))
+            self.vid_idx.extend(list(range(counter, counter+img_num-self.vid_length+1, stride)))
             counter = counter+img_num
-
+            # import pdb;pdb.set_trace()
+        
     def __getitem__(self, idx):
         # load video frames
         vid = []
@@ -144,7 +142,7 @@ class VideoFrame_Dataset(Dataset):
             image_maxv = np.iinfo(image_dtype).max  # 8/16 bit image -> 255/65535
             vid = vid + np.random.normal(0, image_maxv*noise_level, vid.shape)
             vid = vid.clip(0, image_maxv).astype(image_dtype)
-
+        # import pdb;pdb.set_trace()
         return vid[:, None, ...]
 
     def __len__(self):
@@ -155,9 +153,10 @@ class VideoFrame_Dataset_all2CPU(Dataset):
     """
     Dataset for training or test (with ground truth), load entire dataset to CPU to speed the data load process
     """
-
+    # print("我在调试")
     def __init__(self, data_dir, frame_num, patch_sz=None, tform_op=None, sigma_range=0, stride=1):
         super(VideoFrame_Dataset_all2CPU, self).__init__()
+        # print("wowowowowow")
         self.sigma_range = sigma_range
         self.patch_sz = [patch_sz] * \
             2 if isinstance(patch_sz, int) else patch_sz
@@ -167,7 +166,6 @@ class VideoFrame_Dataset_all2CPU(Dataset):
         self.vid_idx = []  # start frame index of each video
         self.imgs = []
         self.stride = stride  # stride of the starting frame
-
         # get image paths and load images
         img_nums = []
         vid_paths = []
@@ -175,9 +173,12 @@ class VideoFrame_Dataset_all2CPU(Dataset):
             # single dataset
             vid_names = sorted(os.listdir(data_dir))
             vid_paths = [opj(data_dir, vid_name) for vid_name in vid_names]
+            # import pdb;pbd.set_trace()
             if all(opif(vid_path) for vid_path in vid_paths):
                 # data_dir is an image dir rather than a vid dir
                 vid_paths = [data_dir]
+            print(data_dir)
+        # import pdb;pdb.set_trace()
         else:
             # multiple dataset
             for data_dir_n in sorted(data_dir):
@@ -208,6 +209,9 @@ class VideoFrame_Dataset_all2CPU(Dataset):
             self.vid_idx.extend(
                 list(range(counter, counter+img_num-self.vid_length+1, stride)))
             counter = counter+img_num
+            # print("调试\n")
+            # print(self.vid_idx)
+            # print("调试\n")
 
     def __getitem__(self, idx):
         # load video frames
@@ -256,7 +260,7 @@ class Blurimg_RealExp_Dataset_all2CPU:
         self.data_dir = data_dir
         self.imgs = []
 
-        # get blurry imag path
+        # get blurry imag path ``
         if isinstance(data_dir, str):
             blur_names = sorted(os.listdir(data_dir))
             self.blur_paths = [opj(data_dir, blur_name)
@@ -290,8 +294,8 @@ def get_data_loaders(data_dir, frame_num, batch_size, patch_size=None, tform_op=
             dataset = VideoFrame_Dataset_all2CPU(
                 data_dir, frame_num, patch_size, tform_op, sigma_range)
         else:
-            dataset = VideoFrame_Dataset(
-                data_dir, frame_num, patch_size, tform_op, sigma_range)
+            dataset = VideoFrame_Dataset(data_dir, frame_num, patch_size, tform_op, sigma_range)
+            # print(len(dataset))
     elif status == 'test':
         if all2CPU:
             dataset = VideoFrame_Dataset_all2CPU(
@@ -317,6 +321,7 @@ def get_data_loaders(data_dir, frame_num, batch_size, patch_size=None, tform_op=
     if status == 'train' or status == 'debug':
         # split dataset into train and validation set
         num_total = len(dataset)
+        # import pdb;pdb.set_trace()
         if isinstance(validation_split, int):
             assert validation_split > 0
             assert validation_split < num_total, "validation set size is configured to be larger than entire dataset."
@@ -324,15 +329,13 @@ def get_data_loaders(data_dir, frame_num, batch_size, patch_size=None, tform_op=
         else:
             num_valid = int(num_total * validation_split)
         num_train = num_total - num_valid
-
-        train_dataset, valid_dataset = random_split(
-            dataset, [num_train, num_valid])
-
+        train_dataset, valid_dataset = random_split(dataset, [num_train, num_valid])
         train_sampler, valid_sampler = None, None
-        if dist.is_initialized():
+        if dist.is_initialized(  ):
             loader_args['shuffle'] = False
             train_sampler = DistributedSampler(train_dataset)
             valid_sampler = DistributedSampler(valid_dataset)
+        # import pdb;pdb.set_trace()
         return DataLoader(train_dataset, sampler=train_sampler, **loader_args), \
             DataLoader(valid_dataset, sampler=valid_sampler, **loader_args)
     else:

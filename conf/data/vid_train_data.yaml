@@ -1,7 +1,8 @@
 # @package data_loader
 _target_: srcs.data_loader._my_video_data_loaders.get_data_loaders
 ## BBNCT/BBNCZ
-data_dir: /hhd/2/lll/BDNet/dataset5_8 # video for debug
+data_dir: /home/fmk/xmuproject/code/dataset/complete_ms_data # video for debug
+# data_dir: /home/fmk/xmuproject/code/BDNet/dataset5_8 # video for debug
 # data_dir: /ssd/0/zzh/dataset/GoPro/GOPRO_Large_all/mini_test/ # video for debug
 # data_dir: /ssd/0/zzh/dataset/GoPro/GOPRO_Large_all/train/  # video
 ## BBNCR
@@ -17,9 +18,9 @@ data_dir: /hhd/2/lll/BDNet/dataset5_8 # video for debug
 # data_dir: /ssd/zzh/dataset/GoPro/GOPRO_Large_all/test/
 # data_dir: /ssd/zzh/dataset/GoPro/GOPRO_Large_all/train/
 
-frame_num: ${frame_n}
-batch_size: 8 # ${batch_size} | 8
-patch_size: 256 # ${patch_size}
+frame_num: 31 #${frame_n}
+batch_size: 31  # ${batch_size} | 8
+patch_size: 256  # ${patch_size}
 tform_op: 'all' # ~ | 'flip' | 'rotate' | 'reverse' | 'all' # MARK
 status: 'train'
 shuffle: true

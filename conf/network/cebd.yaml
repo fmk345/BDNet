@@ -12,7 +12,7 @@ arch:
   # ce_code_init: [1,0,1,0,1,0,0,1] # raskar8-04
   # ce_code_init: [1,0,0,0,1,0,0,1] # raskar8-05
   # ce_code_init: [1,1,1,1,1,1,1,1] # raskar8-allone 
-  # ce_code_init: [1,1,0,1] # raskar4-01
+#   ce_code_init: [1,1,0,1] # raskar4-01
   # ce_code_init: [1,0,1,0,0,1] # raskar6-03
   # ce_code_init: [1,0,0,0,1,0,1,0,0,1] # raskar10-04
   # ce_code_init: [1,0,1,0,1,1,1,1,1,1,0,0,1,0,1,0,1,0,0,0,0,1,1,1,0,1,0,0,0,0,1]

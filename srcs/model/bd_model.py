@@ -83,7 +83,7 @@ class BDNeRV_RC(nn.Module):
             output_list.append(output_k)
 
         output = torch.stack(output_list, dim=1)
-
+        # print(output)
         return output
 
 # --------Ablation------------

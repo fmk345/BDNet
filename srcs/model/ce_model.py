@@ -57,8 +57,7 @@ class CEBlurNet(nn.Module):
 
         # frames to blur encoding
         ce_code_up_ = ce_code_up.view(1, self.frame_n, 1, 1, 1).expand_as(frames)
-        ce_blur_img = torch.sum(
-            ce_code_up_*frames, axis=1)/self.frame_n
+        ce_blur_img = torch.sum(ce_code_up_*frames, axis=1)/self.frame_n
 
         # add noise
         sigma_range = self.sigma_range if self.training else self.test_sigma_range

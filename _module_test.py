@@ -6,9 +6,9 @@ if __name__ == '__main__':
     import cv2
     from einops import rearrange
     a = cv2.imread(
-        '/ssd/0/zzh/tmp/CED/outputs/code_dev/phpnet/test/2022-11-16_16-16-55/outputs/test01_0001_gt_img.jpg')
+        '/ssd/0/zzh/tmp/CED/outputs/code_dev/optce_deblur/real_test2/2023-02-21_22-49-06_raskar/outputs/test01_0001_in_img.jpg')
     b = cv2.imread(
-        '/ssd/0/zzh/tmp/CED/outputs/code_dev/phpnet/test/2022-11-16_16-16-55/outputs/test05_0001_in_img.jpg')
+        '/ssd/0/zzh/tmp/CED/outputs/code_dev/optce_deblur/real_test2/2023-02-21_22-49-06_raskar/outputs/test05_0001_in_img.jpg')
     cv2.imwrite('a.jpg', a[0:512, 0:512, ...])
     cv2.imwrite('b.jpg', b[0:512, 0:512, ...])
 
